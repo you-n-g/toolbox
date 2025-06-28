@@ -1,10 +1,41 @@
-# Python-generated files
+# https://github.com/github/gitignore/blob/master/Python.gitignore
 __pycache__/
 *.py[oc]
 build/
 dist/
 wheels/
 *.egg-info
+*.so
+*.ipynb
+.ipynb_checkpoints
 
 # Virtual environments
 .venv
+
+# data related
+*.pkl
+*.hd5
+*.csv
+*.xlsx
+*.json
+
+# Dev related
+*.log
+*.swp
+.env
+.vim
+.nvimrc
+.vscode
+
+
+# special software
+mlruns/
+.amltconfig
+.aider.*
+
+tags
+/data
+
+# vim
+*.swo
+*.swn

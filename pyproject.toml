@@ -1,6 +1,6 @@
 [project]
 name = "xytb"
-version = "0.1.0"
+version = "0.1.0"      # ← semantic-release rewrites this
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -8,6 +8,23 @@ authors = [
 ]
 requires-python = ">=3.11"
 dependencies = []
+
+[project.optional-dependencies]
+dev = ["python-semantic-release~=8.0"]   # only needed for local/CI release
+
+# ───────── semantic-release settings ─────────
+[tool.semantic_release]
+# Files whose version strings must be bumped
+version_variable = [
+    "src/xytb/__init__.py:__version__",
+    "pyproject.toml:project.version",
+]
+version_source  = "commit"
+commit_parser   = "angular"              # Conventional-Commit style
+tag_format      = "v{version}"
+major_on_zero   = true
+build_command   = "uv pip install --quiet hatchling && hatch build"
+changelog_file  = "CHANGELOG.md"
 
 [build-system]
 requires = ["hatchling"]
