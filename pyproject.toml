@@ -1,6 +1,6 @@
 [project]
 name = "xytb"
-version = "0.1.0"      # ← semantic-release rewrites this
+dynamic = ["version"]
 description = "Add your description here"
 readme = "README.md"
 authors = [
@@ -23,7 +23,7 @@ version_source  = "commit"
 commit_parser   = "angular"              # Conventional-Commit style
 tag_format      = "v{version}"
 major_on_zero   = true
-build_command   = "uv pip install --quiet hatchling && hatch build"
+build_command   = "uvx hatch build"
 changelog_file  = "CHANGELOG.md"
 
 [build-system]
