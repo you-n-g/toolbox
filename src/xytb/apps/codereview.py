@@ -25,16 +25,26 @@ You are an expert in coding.
 
 Here is the output of `git --no-pager diff` in your terminal
 ```
-{{ full_content }}
+{{ git_diff }}
 ```
 
 Here is the complete code of all changed files.
-{{ all_buf }}
+{{ related_file_cont }}
 
-Please review the changes. Please point out the errors that will certainly introduce bugs in the program.  
-When you point them out, please specify the concrete exception that will be raised or the side effect/consequence.
-Only point out the errors that are brought about by the changes.
-If you want to point out other errors you find, please use a clear divider like "---" to distinguish the errors brought about by the changes from others.
+Please review the changes. Your have following focuses:
+1. Please point out the errors that will certainly introduce bugs in the program.
+    - When you point them out, please specify the concrete exception that will be raised or the side effect/consequence.
+    - Only point out the errors that are brought about by the changes.
+2. Please suggest ways to **greatly** improve the design of the changes.
+    - The most important thing is making the design clear and easy to follow. Modules should be well separated and independent.
+        - some general software engineering tricks are not that important.
+    - If you are suggesting design improvements, please provide pseudocode to illustrate your ideas (e.g., better class/interface signatures, conceptual blocks to organize the code).
+        - When you are mentioning code more than one line, please use code block to make it more readable.
+        - Try to use pseudocode when describing the code. This helps keep the explanation clear and focuses on important ideas, leaving out minor details that are not essential.
+
+If you want to point out other errors or detailed design improvements you find, please use a clear divider like "---" to distinguish the errors brought about by the changes from others.
+
+Plaese make the output nice and clear. Clearly seperate the important parts and non-important ones. Organize different sections clearly.
 """
 
 # 1) run git diff to get the changed code
@@ -78,8 +88,8 @@ def get_files_content(files: List[str]) -> str:
 
 
 # 3) get LLM response
-def get_review(full_content: str, all_buf: str, model: str) -> str:
-    prompt = Template(tpl).render(full_content=full_content, all_buf=all_buf)
+def get_review(git_diff: str, related_file_cont: str, model: str) -> str:
+    prompt = Template(tpl).render(git_diff=git_diff, related_file_cont=related_file_cont)
     response = completion(model=model, messages=[{"role": "user", "content": prompt}])
     return response["choices"][0]["message"]["content"]
 
