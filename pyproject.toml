@@ -1,7 +1,7 @@
 [project]
 name = "xytb"
 dynamic = ["version"]
-description = "xytb is (x)iao (y)ang's (t)ool(b)ox"
+description = "xytb is just (x)iao (y)ang's (t)ool(b)ox; https://github.com/you-n-g/toolbox"
 readme = "README.md"
 authors = [
     { name = "Young", email = "afe.young@gmail.com" }
