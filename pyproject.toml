@@ -9,23 +9,21 @@ authors = [
 requires-python = ">=3.11"
 dependencies = []
 
-[project.optional-dependencies]
-dev = ["python-semantic-release~=8.0"]   # only needed for local/CI release
-
 # ───────── semantic-release settings ─────────
 [tool.semantic_release]
-# Files whose version strings must be bumped
-version_variable = [
-    "src/xytb/__init__.py:__version__",
-    "pyproject.toml:project.version",
-]
 version_source  = "commit"
-commit_parser   = "angular"              # Conventional-Commit style
+commit_parser   = "conventional"              # Switch to new parser as angular is deprecated
 tag_format      = "v{version}"
 major_on_zero   = true
 build_command   = "uvx hatch build"
 changelog_file  = "CHANGELOG.md"
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = [
+  "setuptools-scm",
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+local_scheme = "no-local-version"
+version_scheme = "guess-next-dev"

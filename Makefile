@@ -16,7 +16,7 @@ bump:
 # 2) Build the sdist & wheel with Hatch
 build: bump
 	@echo "📦  Building $(PACKAGE) …"
-	uvx hatch build
+	uv build
 
 # 3) Convenience target: bump + build
 release: build
