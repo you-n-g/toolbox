@@ -21,3 +21,4 @@ build: bump
 # 3) Convenience target: bump + build
 release: build
 	@echo "✅  Release artefacts ready in dist/"
+	uv publish
