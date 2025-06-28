@@ -2,6 +2,24 @@
 
 <!-- version list -->
 
+## v1.2.0 (2025-06-28)
+
+### Chores
+
+- Update project description with GitHub URL
+  ([`488dd90`](https://github.com/you-n-g/toolbox/commit/488dd908cd4ce1f95d825dc9901759c65af0727a))
+
+### Documentation
+
+- Update README and pyproject metadata
+  ([`0df7965`](https://github.com/you-n-g/toolbox/commit/0df79652e8d9adf4503f38bcb12d868f0a1bc5f8))
+
+### Features
+
+- Add design feedback
+  ([`124f780`](https://github.com/you-n-g/toolbox/commit/124f780b073137b2c04d66ab7e874ad4789d7a5e))
+
+
 ## v1.1.0 (2025-06-28)
 
 ### Build System
