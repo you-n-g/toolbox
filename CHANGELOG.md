@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.2.1 (2025-10-13)
+
+### Bug Fixes
+
+- Resolve file path issues in get_changed_files for git diff
+  ([`279d54a`](https://github.com/you-n-g/toolbox/commit/279d54a4f712c963294b1d37771b0696a5334630))
+
+
 ## v1.2.0 (2025-06-28)
 
 ### Chores
