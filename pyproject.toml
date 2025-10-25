@@ -35,6 +35,11 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
+[dependency-groups]
+crawl = [
+    "selenium>=4.27.1",
+]
+
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 version_scheme = "guess-next-dev"
