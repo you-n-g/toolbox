@@ -40,6 +40,12 @@ crawl = [
     "selenium>=4.27.1",
 ]
 
+[project.optional-dependencies]
+# UV use dependency-groups as local dev dependencies not for release. So we have to manually add them to the extras.
+crawl = [
+    "selenium>=4.27.1",
+]
+
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 version_scheme = "guess-next-dev"
