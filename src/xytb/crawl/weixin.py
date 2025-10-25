@@ -34,7 +34,19 @@ def get_content(url: str) -> str | None:
         '--user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
     )
 
-    driver = webdriver.Remote(options=options, command_executor="http://localhost:4444")
+    # Try connecting to Selenium server, handle connection errors gracefully
+    try:
+        driver = webdriver.Remote(
+            options=options,
+            command_executor="http://localhost:4444/wd/hub"
+        )
+    except Exception as e:
+        print(
+            f"Failed to connect to Selenium server at localhost:4444 - {e}\n"
+            "Make sure Docker is running and execute:\n"
+            "docker run -d -p 4444:4444 --shm-size=\"2g\" selenium/standalone-chrome:4.27.0-20250101"
+        )
+        return None
 
     try:
         driver.get(url)
