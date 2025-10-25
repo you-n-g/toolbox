@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.0 (2025-10-25)
+
+### Features
+
+- Add selenium-based crawler for WeChat article content extraction
+  ([`e288479`](https://github.com/you-n-g/toolbox/commit/e28847902b461495ed24f34ef2771f783d394605))
+
+
 ## v1.2.1 (2025-10-13)
 
 ### Bug Fixes
