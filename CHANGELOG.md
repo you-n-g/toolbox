@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.3.1 (2025-10-25)
+
+### Bug Fixes
+
+- Handle Selenium server connection errors and update endpoint path
+  ([`23b66b6`](https://github.com/you-n-g/toolbox/commit/23b66b6e124f60a8377c245f6e18eff242860b68))
+
+
 ## v1.3.0 (2025-10-25)
 
 ### Features
