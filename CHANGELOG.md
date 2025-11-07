@@ -2,6 +2,19 @@
 
 <!-- version list -->
 
+## v1.4.0 (2025-11-07)
+
+### Build System
+
+- Add optional crawl dependency group to pyproject.toml
+  ([`af15f18`](https://github.com/you-n-g/toolbox/commit/af15f18c71810a58d59158245cb5895673713108))
+
+### Features
+
+- Add TmuxPane wrapper and T function using libtmux
+  ([`526a419`](https://github.com/you-n-g/toolbox/commit/526a4196d4afc0b85a84938b7be12dcc461d47ff))
+
+
 ## v1.3.1 (2025-10-25)
 
 ### Bug Fixes
