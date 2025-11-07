@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.4.1 (2025-11-07)
+
+### Bug Fixes
+
+- Lower required Python version to 3.10 in pyproject.toml
+  ([`0458633`](https://github.com/you-n-g/toolbox/commit/045863339f6d4c5112edfb2f55c9fd2754380b07))
+
+
 ## v1.4.0 (2025-11-07)
 
 ### Build System
