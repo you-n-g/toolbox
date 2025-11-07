@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "Young", email = "afe.young@gmail.com" }
 ]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 dependencies = [
     "libtmux>=0.47.0",
     "litellm>=1.73.2",
