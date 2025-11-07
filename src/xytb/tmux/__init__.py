@@ -25,6 +25,8 @@ Exceptions:
 from __future__ import annotations
 
 from typing import Tuple
+import loguru
+from loguru import logger
 import time
 import libtmux
 
@@ -54,9 +56,11 @@ class TmuxPane:
         # libtmux Pane.send_keys will send the given keys to the pane.
         # Using enter=True sends Enter after the keys.
         done_marker = "__tmux_done__"
-        self.pane.send_keys(f"{cmd} ; echo {done_marker}", enter=enter)
+        cmd = f"{cmd} ; echo {done_marker}"
+        logger.info(f"Sending command {cmd!r} to pane {self.pane.pane_id}")
+        self.pane.send_keys(cmd, enter=enter)
 
-        time.sleep(1)  # NOTE: it is very important to sleep here. Make sure the marker has been sent!
+        time.sleep(1 + len(cmd) / 80)  # NOTE: it is very important to sleep here. Make sure the marker has been sent!
 
         # If we executed the command (enter=True), wait until the marker shows up in output.
         if wait:
