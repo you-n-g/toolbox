@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.5.0 (2025-11-07)
+
+### Features
+
+- Add loguru logging and improve sleep timing in TmuxPane
+  ([`27638d6`](https://github.com/you-n-g/toolbox/commit/27638d674a579b7c6561fa7bf9653fe2fbec18d8))
+
+
 ## v1.4.1 (2025-11-07)
 
 ### Bug Fixes
