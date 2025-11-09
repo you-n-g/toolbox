@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.5.1 (2025-11-09)
+
+### Bug Fixes
+
+- Improve tmux pane command logging and done marker detection logic
+  ([`7d0210d`](https://github.com/you-n-g/toolbox/commit/7d0210da9dab499bc8f5ff904f1bd0857c0778c6))
+
+
 ## v1.5.0 (2025-11-07)
 
 ### Features
