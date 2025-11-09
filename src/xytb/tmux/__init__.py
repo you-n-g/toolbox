@@ -56,8 +56,9 @@ class TmuxPane:
         # libtmux Pane.send_keys will send the given keys to the pane.
         # Using enter=True sends Enter after the keys.
         done_marker = "__tmux_done__"
-        cmd = f"{cmd} ; echo {done_marker}"
-        logger.info(f"Sending command {cmd!r} to pane {self.pane.pane_id}")
+        echo_cmd_suffix = f"; echo {done_marker}"
+        cmd = f"{cmd}{echo_cmd_suffix}"
+        logger.info(f"Sending command {cmd!r} to pane {self.pane.session_name}.{self.pane.window.name}.{self.pane.pane_index}")
         self.pane.send_keys(cmd, enter=enter)
 
         time.sleep(1 + len(cmd) / 80)  # NOTE: it is very important to sleep here. Make sure the marker has been sent!
@@ -67,14 +68,18 @@ class TmuxPane:
             while True:
                 lines = self.pane.capture_pane()  # why it only return 
 
+                last_line = ""
                 for line in lines[::-1]:
-                    # __import__('ipdb').set_trace()
                     # latest line is finished
-                    if done_marker in line and "; echo" not in line:
+                    # Assumption: the echo result will appear in one line.
+                    if done_marker == line.strip():
                         return
+
                     # latest line is not finished
-                    if done_marker in line and "; echo" in line:
+                    # Assumption: the command will not be split into more than 2 lines.!!!
+                    if done_marker in (line + last_line):
                         break
+                    last_line = line
 
                 time.sleep(0.1)
 
