@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.1 (2025-11-18)
+
+### Bug Fixes
+
+- Add space before echo marker in tmux command string
+  ([`2fc2213`](https://github.com/you-n-g/toolbox/commit/2fc2213ffa472cea04cf87d9278fb0b18b0e5d3f))
+
+
 ## v1.6.0 (2025-11-18)
 
 ### Features
