@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.0 (2025-11-18)
+
+### Features
+
+- Add create_if_not_exists to T and add test for tmux creation
+  ([`0baaea6`](https://github.com/you-n-g/toolbox/commit/0baaea6bd2c70c654f1b0e4420906293a782cb99))
+
+
 ## v1.5.1 (2025-11-09)
 
 ### Bug Fixes
