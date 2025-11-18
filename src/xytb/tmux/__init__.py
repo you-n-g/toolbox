@@ -57,7 +57,7 @@ class TmuxPane:
         # Using enter=True sends Enter after the keys.
         done_marker = "__tmux_done__"
         echo_cmd_suffix = f"; echo {done_marker}"
-        cmd = f"{cmd}{echo_cmd_suffix}"
+        cmd = f"{cmd} {echo_cmd_suffix}"
         logger.info(f"Sending command {cmd!r} to pane {self.pane.session_name}.{self.pane.window.name}.{self.pane.pane_index}")
         self.pane.send_keys(cmd, enter=enter)
 
