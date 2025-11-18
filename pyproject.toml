@@ -48,6 +48,10 @@ crawl = [
     "selenium>=4.27.1",
 ]
 
+dev = [
+  "pytest"
+]
+
 [tool.setuptools_scm]
 local_scheme = "no-local-version"
 version_scheme = "guess-next-dev"

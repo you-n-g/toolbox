@@ -25,10 +25,10 @@ Exceptions:
 from __future__ import annotations
 
 from typing import Tuple
-import loguru
 from loguru import logger
 import time
 import libtmux
+from libtmux._internal.query_list import ObjectDoesNotExist
 
 
 __all__ = ["TmuxPane", "T"]
@@ -118,45 +118,78 @@ def _parse_target(target: str) -> Tuple[str, str, int]:
     return session_name, window_name, pane_index
 
 
-def T(target: str) -> TmuxPane:
+def T(target: str, create_if_not_exists: bool = False) -> TmuxPane:
     """
     Resolve a tmux target and return a TmuxPane wrapper.
 
     Args:
         target: Target string "<session>.<window>" or "<session>.<window>.<pane>".
+        create_if_not_exists: When True, create the session/window/pane if missing.
 
     Returns:
         TmuxPane bound to the resolved pane.
 
     Raises:
-        ValueError: If session, window, or pane cannot be found.
+        ValueError: If session, window, or pane cannot be found (and create_if_not_exists is False).
     """
     session_name, window_name, pane_index = _parse_target(target)
 
     server = libtmux.Server()
+    # 1) try to find the session
+    try:
+        session = server.sessions.get(session_name=session_name)
+    except ObjectDoesNotExist:
+        if create_if_not_exists:
+            session = server.new_session(session_name=session_name, attach=False)
+            # Use the auto-created window; rename it to requested window_name to avoid creating an extra window.
+            win = session.windows[0]
+            if win.name != window_name:
+                win.rename_window(window_name)
+        else:
+            raise
 
-    session = server.sessions.get(session_name=session_name)
-    if session is None:
-        raise ValueError(f"Tmux session {session_name!r} not found.")
+    # 2) try to find the window
+    # 2.1) try to find the window by name
+    try:
+        window = session.windows.get(window_name=window_name)
+    except ObjectDoesNotExist:
+        window = None
 
-    window = session.windows.get(window_name=window_name)
+    # 2.2) try to find the window by index
     if window is None:
         # Fallback: allow numeric window index if name not found
         try:
             win_idx = int(window_name)
-            window = session.windows.get(window_index=win_idx)
+            try:
+                window = session.windows.get(window_index=win_idx)
+            except ObjectDoesNotExist:
+                window = None
         except ValueError:
             window = None
 
+    # 2.3) create the window if not found
     if window is None:
-        raise ValueError(f"Tmux window {window_name!r} not found in session {session_name!r}.")
+        if create_if_not_exists:
+            window = session.new_window(attach=False, window_name=window_name)
+        else:
+            raise ObjectDoesNotExist
 
+    # 3) find the pane
     panes = window.panes
-    if pane_index < 0 or pane_index >= len(panes):
+    if pane_index < 0:
         raise ValueError(
             f"Pane index {pane_index} out of range for window {window_name!r} in session {session_name!r} "
             f"(available panes: {len(panes)})."
         )
 
+    # 3.1) create enough panes
+    while pane_index >= len(panes):
+        if create_if_not_exists:
+            window.split_window(attach=False)
+            panes = window.panes
+        else:
+            raise ObjectDoesNotExist
+
+    # 3.2) return the pane via index.
     pane = panes[pane_index]
     return TmuxPane(pane)
