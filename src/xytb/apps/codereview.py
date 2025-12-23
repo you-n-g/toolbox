@@ -72,14 +72,14 @@ def run_git_diff() -> str:
 def get_changed_files() -> List[str]:
     result = subprocess.run(["git", "diff", "--name-only", settings.diff_head], capture_output=True, text=True)
     files = result.stdout.strip().splitlines()
-    # Determine the repository root (directory containing the .git folder)
-    cur = os.getcwd()
-    while not os.path.isdir(os.path.join(cur, ".git")):
-        parent = os.path.dirname(cur)
-        if parent == cur:  # Reached filesystem root; fall back to current working directory
-            break
-        cur = parent
-    repo_root = cur
+    # Determine the repository root:
+    try:
+        repo_root = subprocess.check_output(
+            ["git", "rev-parse", "--show-toplevel"], text=True
+        ).strip()
+    except subprocess.CalledProcessError:
+        repo_root = os.getcwd()
+
     # Build absolute paths from repo root and filter out non-existent files (e.g., deleted/renamed)
     full_paths = [os.path.join(repo_root, f) for f in files]
     return [p for p in full_paths if os.path.isfile(p)]
