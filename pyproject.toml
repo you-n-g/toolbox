@@ -31,6 +31,9 @@ major_on_zero   = true
 build_command   = "uvx hatch build"
 changelog_file  = "CHANGELOG.md"
 
+[tool.semantic_release.commit_parser_options]
+patch_tags = ["fix", "perf", "refactor"]
+
 [build-system]
 requires = [
   "setuptools-scm",
