@@ -2,6 +2,14 @@
 
 <!-- version list -->
 
+## v1.6.2 (2025-12-24)
+
+### Bug Fixes
+
+- Use git rev-parse to determine repo root in get_changed_files
+  ([`ecef914`](https://github.com/you-n-g/toolbox/commit/ecef9143641c3e2429cd275df4a036d6e40ac231))
+
+
 ## v1.6.1 (2025-11-18)
 
 ### Bug Fixes
