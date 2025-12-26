@@ -35,7 +35,10 @@ Please review the changes. Your have following focuses:
 1. Please point out the errors that will certainly introduce bugs in the program.
     - When you point them out, please specify the concrete exception that will be raised or the side effect/consequence.
     - Only point out the errors that are brought about by the changes.
-2. Please suggest ways to **greatly** improve the design of the changes.
+2. Please identify places where the code can be clearly simplified. For example:
+    - Remove unnecessary try-except blocks.
+        - Follow the principle: `Do not catch unknown exceptions when adding new code. Let errors propagate so they can be detected and fixed quickly.`
+3. Please suggest ways to **greatly** improve the design of the changes.
     - The most important thing is making the design clear and easy to follow. Modules should be well separated and independent.
         - some general software engineering tricks are not that important.
     - If you are suggesting design improvements, please provide pseudocode to illustrate your ideas (e.g., better class/interface signatures, conceptual blocks to organize the code).
